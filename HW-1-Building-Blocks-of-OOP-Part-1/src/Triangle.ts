@@ -9,7 +9,7 @@ export class Triangle extends Shape {
     constructor(p1: Point, p2: Point, p3: Point);
     constructor(p1: Point, p2: Point, p3: Point, color: string, filled: boolean)
     constructor(p1: Point, p2: Point, p3: Point, color?: string, filled?: boolean) {
-        super([p1,p2,p3], color = 'green', filled = false );
+        super([p1,p2,p3], color, filled);
 
         this.points = [p1,p2,p3];
         this.color = color ?? 'green';
@@ -17,11 +17,9 @@ export class Triangle extends Shape {
     }
   
     public toString(): string {
-      const formattedPointsStr = this.points.reduce((accum: string[], curr: Point, index: number) => {
-        return [...accum, `v${index + 1}=${this.points[index].toString()}`]
-      },[]).join(',')
-    
-      return `Triangle[${formattedPointsStr}]`;
+      const [v1, v2, v3] = this.points;
+      
+      return `Triangle[v1=${v1},v2=${v2},v3=${v3}]`
     }
   
     public getType(): string {

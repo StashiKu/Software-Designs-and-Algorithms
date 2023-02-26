@@ -1,6 +1,6 @@
 export class Point {
-    public x: number;
-    public y: number;
+    private x: number;
+    private y: number;
 
     constructor();
     constructor(x: number);
@@ -51,7 +51,7 @@ export class Point {
         const exponent = 2;
         const a = xX - this.x;
         const b = yY - this.y;
-        let c = Math.sqrt((a ** exponent) + (b ** exponent));
+        let c = Math.hypot(a, b);
 
         return this.roundNumber(c);
     }
@@ -59,7 +59,7 @@ export class Point {
     public distance(): number;
     public distance(point: Point): number;
     public distance(xX: number, yY: number): number;
-    public distance(...arg: any): number | null {
+    public distance(...arg: Point[] | number[]): number {
         if (arg.length === 0) {
             return this.calculate(0, 0);
         }
@@ -75,7 +75,5 @@ export class Point {
         if (arg.length === 2 && typeof arg[0] === 'number' && typeof arg[1] === 'number') {
             return this.calculate(arg[0], arg[1]);
         }
-
-        return null;
     }
 }
